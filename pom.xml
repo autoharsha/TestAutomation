@@ -51,7 +51,7 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
-            <scope>test</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -84,13 +84,6 @@
             <artifactId>cucumber-core</artifactId>
             <version>${cucumber.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.7.1</version>
-            <scope>compile</scope>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -117,6 +110,37 @@
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.0.2</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <mainClass>runner.CustomSuiteRunner</mainClass>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>3.2.4</version>
+                    <configuration>
+                        <createDependencyReducedPom>false</createDependencyReducedPom>
+                        <transformers>
+                            <transformer
+                                    implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <manifestEntries>
+                                    <Main-Class>runner.CustomSuiteRunner</Main-Class>
+                                </manifestEntries>
+                            </transformer>
+                        </transformers>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>shade</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
