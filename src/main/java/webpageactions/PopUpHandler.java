@@ -1,5 +1,6 @@
 package webpageactions;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriverException;
@@ -10,8 +11,8 @@ import testcontext.TestingContext;
 
 import java.time.Duration;
 
+@Slf4j
 public class PopUpHandler extends BaseHandler {
-    //private //logger //logger = LogManager.get//logger(this.getClass());
 
     public PopUpHandler(TestingContext context) {
         super(context.getDriver());
@@ -36,10 +37,10 @@ public class PopUpHandler extends BaseHandler {
             alert = null;
             if (isAlertPresent()) {
                 alert = driver.switchTo().alert();
-                //logger.info("Switching to Alert........");
+                log.info("Switching to Alert........");
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to switch to the alert.\n" + e.getMessage());
+            log.error("Unable to switch to the alert.\n" + e.getMessage());
             throw new WebDriverException("Unable to switch to the alert.\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -56,7 +57,7 @@ public class PopUpHandler extends BaseHandler {
                 alert.accept();
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable accept the alert \n " + e.getMessage());
+            log.error("Unable accept the alert \n " + e.getMessage());
             throw new WebDriverException("Unable accept the alert \n " + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -72,7 +73,7 @@ public class PopUpHandler extends BaseHandler {
                 alert.dismiss();
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable dismiss the alert \n " + e.getMessage());
+            log.error("Unable dismiss the alert \n " + e.getMessage());
             throw new WebDriverException("Unable dismiss the alert \n " + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -86,12 +87,12 @@ public class PopUpHandler extends BaseHandler {
             /* driver.switchTo().defaultContent(); */
             if (isAlertPresent()) {
                 Alert alert = driver.switchTo().alert();
-                //logger.info("Switching to alert");
+                log.info("Switching to alert");
                 alertText = alert.getText();
             }
 
         } catch (WebDriverException e) {
-            //logger.error("Unable get the text from an alert \n " + e.getMessage());
+            log.error("Unable get the text from an alert \n " + e.getMessage());
             throw new WebDriverException("Unable get the text from an alert \n " + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -106,7 +107,7 @@ public class PopUpHandler extends BaseHandler {
             String newURL = "https://" + userName + ":" + password + "@" + urlWithoutHTTPS;
             driver.get(newURL);
         } catch (WebDriverException e) {
-            //logger.error("Unable top login to the application with windows authentication.\n" + e.getMessage());
+            log.error("Unable top login to the application with windows authentication.\n" + e.getMessage());
             throw new WebDriverException("Unable top login to the application with windows authentication.\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -122,7 +123,7 @@ public class PopUpHandler extends BaseHandler {
 			alert.authenticateUsing(credentials);
 
 		} catch (WebDriverException e) {
-			//logger.error("Unable top login to the application with windows authentication.\n" + e.getMessage());
+			log.error("Unable top login to the application with windows authentication.\n" + e.getMessage());
 			throw new WebDriverException("Unable top login to the application with windows authentication.\n" + e);
 		}
 		if (waitForElement != null && waitForElement.length > 0) {

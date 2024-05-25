@@ -1,5 +1,6 @@
 package runner;
 
+import lombok.extern.slf4j.Slf4j;
 import org.testng.TestNG;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
@@ -9,6 +10,7 @@ import testexecution.configuration.GlobalConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class CustomSuiteRunner {
 
     private static String getPlatform() {
@@ -28,14 +30,13 @@ public class CustomSuiteRunner {
         suite.setDataProviderThreadCount(Integer.parseInt(GlobalConfiguration.FRAMEWORK_CONFIG.threadCount()));
         suite.setThreadCount(Integer.parseInt(GlobalConfiguration.FRAMEWORK_CONFIG.threadCount()));
         suite.setVerbose(1);
-
         suite.setName("Cucumber Suite runner");
         XmlTest xmlTest = new XmlTest(suite);
         xmlTest.setName("Test running on:" + getPlatform().toUpperCase());
         xmlTest.addParameter("Platform", getPlatform().toUpperCase());
         xmlTest.setParallel(XmlSuite.ParallelMode.TESTS);
         List<XmlClass> myClasses = new ArrayList<>();
-        myClasses.add(new XmlClass("runner.CucumberRunner"));
+        myClasses.add(new XmlClass("runner.CucumberTestNGTests"));
         xmlTest.setXmlClasses(myClasses);
         return suite;
     }
@@ -45,8 +46,7 @@ public class CustomSuiteRunner {
         List<XmlSuite> suites = new ArrayList<>();
         CustomSuiteRunner suiteRunner = new CustomSuiteRunner();
         suites.add(suiteRunner.getSuite());
-        System.out.println("<------TestNG Xml Generated is \n" + suites.get(0).toXml());
-        //log.debug("<------TestNG Xml Generated is \n" + suites.get(0).toXml());
+        log.info("\n<------ TestNG Xml Generated is ------>\n" + suites.get(0).toXml());
         TestNG tng = new TestNG();
         tng.setXmlSuites(suites);
         tng.run();

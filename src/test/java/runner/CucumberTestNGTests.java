@@ -10,9 +10,9 @@ import org.testng.annotations.DataProvider;
         //monochrome = true,
         // dryRun = true,
         plugin = {"pretty", "json:target/cucumber-reports/cucumber.json"},
-        tags = ("@GreenCart")
+        tags = ("@UI")
 )
-public class CucumberRunner extends AbstractTestNGCucumberTests {
+public class CucumberTestNGTests extends AbstractTestNGCucumberTests {
     @Override
     @DataProvider(parallel = true)
     public Object[][] scenarios() {

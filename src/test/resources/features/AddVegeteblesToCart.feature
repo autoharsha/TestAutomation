@@ -1,10 +1,9 @@
 @UI
-Feature: Add vegetables to cart
-  and Proceed with payment
+Feature: Add vegetables to cart and Proceed with payment
 
   @GreenCart
-  Scenario: GreenKart Shoping
-    Given Lauch GreenKart Browser with URL "https://rahulshettyacademy.com/seleniumPractise/"
+  Scenario: GreenKart Shopping
+    Given Launch GreenKart Browser with URL "https://rahulshettyacademy.com/seleniumPractise/"
     When Add vegetables To Cart
       | Cucumber    |
       | Mushroom    |

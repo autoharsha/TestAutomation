@@ -1,5 +1,6 @@
 package webpageactions;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -8,13 +9,14 @@ import testcontext.TestingContext;
 
 import java.util.List;
 
+@Slf4j
 public class ActionHandler extends BaseHandler {
-    //private //logger //logger = LogManager.get//logger(this.getClass());
+
     private TestingContext testingContext;
 
     public ActionHandler(TestingContext context) {
         super(context.getDriver());
-        testingContext = context;
+        this.testingContext = context;
     }
 
     /***
@@ -31,7 +33,7 @@ public class ActionHandler extends BaseHandler {
                 actions.doubleClick(element).build().perform();
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to double click on the element: " + element + "\n" + e.getMessage());
+            log.error("Unable to double click on the element: " + element + "\n" + e.getMessage());
             throw new WebDriverException("Unable to double click on the element: " + element + "\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {

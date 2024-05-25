@@ -2,16 +2,17 @@ package pages;
 
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import testcontext.TestingContext;
 
 public abstract class BasePage {
     protected WebDriver driver;
     protected TestingContext testingContext;
-    Boolean flag = false;
-
+    
     public BasePage(TestingContext context) {
         this.testingContext = context;
         this.driver = context.getDriver();
+        PageFactory.initElements(this.driver, this);
         setupLocalProperties();
     }
 
@@ -20,5 +21,5 @@ public abstract class BasePage {
     protected abstract String getPageDescription();
 
     protected abstract void setupLocalProperties();
-    
+
 }

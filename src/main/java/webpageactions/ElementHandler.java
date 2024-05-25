@@ -1,5 +1,6 @@
 package webpageactions;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -11,9 +12,9 @@ import testcontext.TestingContext;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class ElementHandler extends BaseHandler {
 
-    // private //logger //logger = LogManager.get//logger(this.getClass());
     private TestingContext testingContext;
 
     public ElementHandler(TestingContext context) {
@@ -35,7 +36,7 @@ public class ElementHandler extends BaseHandler {
                 element.click();
             }
         } catch (WebDriverException e) {
-            ////logger.error("Unable to click on the element: " + element + "\n " + e.getMessage());
+            log.error("Unable to click on the element: " + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to click on the element: " + element + "\n " + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -51,7 +52,7 @@ public class ElementHandler extends BaseHandler {
                 javaScriptExecutor.executeScript("arguments[0].click();", element);
             }
         } catch (WebDriverException e) {
-            ////logger.error("Unable to enter text on the element: " + element + "\n " + e.getMessage());
+            log.error("Unable to enter text on the element: " + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to enter text on the element: " + element + "\n " + e);
         }
 
@@ -75,7 +76,7 @@ public class ElementHandler extends BaseHandler {
                 cssValue = element.getCssValue(propertyName);
             }
         } catch (Exception e) {
-            ////logger.error("Unable to get the css value from the element: " + element + "\n " + e.getMessage());
+            log.error("Unable to get the css value from the element: " + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to get the css vlaue from the element: " + element + "\n " + e);
         }
         return cssValue;
@@ -97,7 +98,7 @@ public class ElementHandler extends BaseHandler {
 
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to enter text on the element: " + element + "\n " + e.getMessage());
+            log.error("Unable to enter text on the element: " + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to enter text on the element: " + element + "\n " + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -120,7 +121,7 @@ public class ElementHandler extends BaseHandler {
                 text = element.getText();
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to get the text from element: " + element + "\n " + e.getMessage());
+            log.error("Unable to get the text from element: " + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to get the text from element: " + element + "\n " + e);
         }
         return text.trim();
@@ -142,7 +143,7 @@ public class ElementHandler extends BaseHandler {
                     text.add(element.get(i).getText().trim());
                 }
             } catch (WebDriverException e) {
-                //logger.error("Unable to get the text from element: " + element + "\n " + e.getMessage());
+                log.error("Unable to get the text from element: " + element + "\n " + e.getMessage());
                 throw new WebDriverException("Unable to get the text from element: " + element + "\n " + e);
             }
         }
@@ -166,7 +167,7 @@ public class ElementHandler extends BaseHandler {
                 text = element.getAttribute("value");
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to locate the element \n " + e.getMessage());
+            log.error("Unable to locate the element \n " + e.getMessage());
             throw new WebDriverException("Unable to locate the element \n " + e);
         }
         return text.trim();
@@ -190,8 +191,8 @@ public class ElementHandler extends BaseHandler {
                 text = element.getAttribute(attribute);
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to get the text from " + attribute + " attribute of an element: " + element + "\n "
-            //+e.getMessage());
+            log.error("Unable to get the text from " + attribute + " attribute of an element: " + element + "\n "
+                    + e.getMessage());
             throw new WebDriverException(
                     "Unable to get the text from " + attribute + " attribute of an element: " + element + "\n " + e);
         }
@@ -214,7 +215,7 @@ public class ElementHandler extends BaseHandler {
                 dropDown = new Select(element);
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to get the dropdwon element: " + element + "\n " + e.getMessage());
+            log.error("Unable to get the dropdwon element: " + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to get the dropdwon element: " + element + "\n " + e);
         }
         return dropDown;
@@ -233,7 +234,7 @@ public class ElementHandler extends BaseHandler {
                 isTrue = true;
             }
         } catch (WebDriverException e) {
-            //logger.error("Dropdown is not displayed \n " + e.getMessage());
+            log.error("Dropdown is not displayed \n " + e.getMessage());
             throw new WebDriverException("Dropdown is not displayed \n " + e);
         }
         return isTrue;
@@ -246,7 +247,7 @@ public class ElementHandler extends BaseHandler {
                 dropdown.selectByVisibleText(textToSelect);
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to select value from the dropdown:" + element + "\n " + e.getMessage());
+            log.error("Unable to select value from the dropdown:" + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to select value from the dropdown:" + element + "\n " + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -261,7 +262,7 @@ public class ElementHandler extends BaseHandler {
                 dropdown.selectByValue(value);
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to select value from the dropdown:" + element + "\n " + e.getMessage());
+            log.error("Unable to select value from the dropdown:" + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to select value from the dropdown:" + element + "\n " + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -276,7 +277,7 @@ public class ElementHandler extends BaseHandler {
                 dropdown.selectByIndex(index);
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to select value from the dropdown:" + element + "\n " + e.getMessage());
+            log.error("Unable to select value from the dropdown:" + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to select value from the dropdown:" + element + "\n " + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -292,7 +293,7 @@ public class ElementHandler extends BaseHandler {
                 selectedValue = dropdown.getFirstSelectedOption().getText();
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to get the selected value from the dropdown:" + element + "\n " + e.getMessage());
+            log.error("Unable to get the selected value from the dropdown:" + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to get the selected value from the dropdown:" + element + "\n " + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -304,9 +305,9 @@ public class ElementHandler extends BaseHandler {
     public void launchApplication(String url, WebElement... waitForElement) {
         try {
             driver.get(url);
-            //logger.info("Url lanched is " + url);
+            log.info("Url lanched is " + url);
         } catch (WebDriverException e) {
-            //logger.error("Unable to launch the application url: " + url + "\n" + e.getMessage());
+            log.error("Unable to launch the application url: " + url + "\n" + e.getMessage());
             throw new WebDriverException("Unable to launch the application url: " + url + "\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -321,7 +322,7 @@ public class ElementHandler extends BaseHandler {
                 isTrue = true;
             }
         } catch (WebDriverException e) {
-            //logger.error("Element " + element + " is not displayed \n " + e.getMessage());
+            log.error("Element " + element + " is not displayed \n " + e.getMessage());
             throw new WebDriverException("Element " + element + " is not displayed \n " + e);
         }
         return isTrue;
@@ -334,7 +335,7 @@ public class ElementHandler extends BaseHandler {
                 isTrue = true;
             }
         } catch (WebDriverException e) {
-            //logger.error("Element " + element + " is not displayed \n " + e.getMessage());
+            log.error("Element " + element + " is not displayed \n " + e.getMessage());
             throw new WebDriverException("Element " + element + " is not displayed \n " + e);
         }
         return isTrue;
@@ -347,7 +348,7 @@ public class ElementHandler extends BaseHandler {
                 isTrue = true;
             }
         } catch (WebDriverException e) {
-            //logger.error("Element " + element + " is displayed \n " + e.getMessage());
+            log.error("Element " + element + " is displayed \n " + e.getMessage());
             throw new WebDriverException("Element " + element + " is displayed \n " + e);
         }
         return isTrue;
@@ -360,7 +361,7 @@ public class ElementHandler extends BaseHandler {
                 isTrue = true;
             }
         } catch (WebDriverException e) {
-            //logger.error("Element " + element + " is displayed \n " + e.getMessage());
+            log.error("Element " + element + " is displayed \n " + e.getMessage());
             throw new WebDriverException("Element " + element + " is displayed \n " + e);
         }
         return isTrue;
@@ -373,7 +374,7 @@ public class ElementHandler extends BaseHandler {
                 isTrue = true;
             }
         } catch (WebDriverException e) {
-            //logger.error("Element " + element + " is not enabled \n " + e.getMessage());
+            log.error("Element " + element + " is not enabled \n " + e.getMessage());
             throw new WebDriverException("Element " + element + " is not enabled \n " + e);
         }
         return isTrue;
@@ -389,7 +390,7 @@ public class ElementHandler extends BaseHandler {
                 isTrue = true;
             }
         } catch (WebDriverException e) {
-            //logger.error("Element " + element + " is enabled \n " + e.getMessage());
+            log.error("Element " + element + " is enabled \n " + e.getMessage());
             throw new WebDriverException("Element " + element + " is enabled \n " + e);
         }
         return isTrue;
@@ -403,7 +404,7 @@ public class ElementHandler extends BaseHandler {
                 allOptions = dropdown.getOptions();
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to get all the options from the dropdown:" + element + "\n " + e.getMessage());
+            log.error("Unable to get all the options from the dropdown:" + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to get all the options from the dropdown:" + element + "\n " + e);
         }
         return allOptions;
@@ -417,7 +418,7 @@ public class ElementHandler extends BaseHandler {
                 allOptionValues.add(getText(webElement));
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to get all the options from the dropdown:" + element + "\n " + e.getMessage());
+            log.error("Unable to get all the options from the dropdown:" + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to get all the options from the dropdown:" + element + "\n " + e);
         }
         return allOptionValues;
@@ -437,7 +438,7 @@ public class ElementHandler extends BaseHandler {
                 dropdown.selectByIndex(allOptions.size() - 1);
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to get all the options from the dropdown:" + element + "\n " + e.getMessage());
+            log.error("Unable to get all the options from the dropdown:" + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to get all the options from the dropdown:" + element + "\n " + e);
         }
     }
@@ -446,7 +447,7 @@ public class ElementHandler extends BaseHandler {
         try {
             wait.until(ExpectedConditions.visibilityOfAllElements(elements));
         } catch (WebDriverException e) {
-            //logger.error("Element " + elements + " is not visible \n " + e.getMessage());
+            log.error("Element " + elements + " is not visible \n " + e.getMessage());
             throw new WebDriverException("Element " + elements + " is not visible \n " + e);
         }
 
@@ -478,8 +479,8 @@ public class ElementHandler extends BaseHandler {
                 text = element.getAttribute(attribute);
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to get the text from " + attribute + " attribute of an element: " + element + "\n "
-            //+e.getMessage());
+            log.error("Unable to get the text from " + attribute + " attribute of an element: " + element + "\n "
+                    + e.getMessage());
         }
         return text.trim();
     }
@@ -522,7 +523,7 @@ public class ElementHandler extends BaseHandler {
                 selectedValue = dropdown.getFirstSelectedOption().getText();
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to get the selected value from the dropdown:" + element + "\n " + e.getMessage());
+            log.error("Unable to get the selected value from the dropdown:" + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to get the selected value from the dropdown:" + element + "\n " + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {

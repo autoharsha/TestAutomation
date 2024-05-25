@@ -1,11 +1,11 @@
 package webpageactions;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.*;
 import testcontext.TestingContext;
 
+@Slf4j
 public class JavaScriptHandler extends BaseHandler {
-
-    //private //logger //logger = LogManager.get//logger(this.getClass());
 
     public JavaScriptHandler(TestingContext context) {
         super(context.getDriver());
@@ -37,7 +37,7 @@ public class JavaScriptHandler extends BaseHandler {
                 javaScriptExecutor.executeScript("arguments[0].click();", element);
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to enter text on the element: " + element + "\n " + e.getMessage());
+            log.error("Unable to enter text on the element: " + element + "\n " + e.getMessage());
             throw new WebDriverException("Unable to enter text on the element: " + element + "\n " + e);
         }
 

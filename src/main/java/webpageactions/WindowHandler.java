@@ -1,6 +1,7 @@
 package webpageactions;
 
 import com.google.common.collect.Iterables;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -14,9 +15,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 public class WindowHandler extends BaseHandler {
-
-    //private //logger //logger = LogManager.get//logger(this.getClass());
 
     WebDriver currentDriver = null;
 
@@ -33,9 +33,9 @@ public class WindowHandler extends BaseHandler {
     public WebDriver switchToLatestWindow(WebElement... waitForElement) {
         try {
             currentDriver = driver.switchTo().window(Iterables.getLast(driver.getWindowHandles()));
-            //logger.info("Switching to window : " + driver.getTitle());
+            log.info("Switching to window : " + driver.getTitle());
         } catch (WebDriverException e) {
-            //logger.error("Unable to switch to latest window.\n" + e.getMessage());
+            log.error("Unable to switch to latest window.\n" + e.getMessage());
             throw new WebDriverException("Unable to switch to latest window.\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -48,9 +48,9 @@ public class WindowHandler extends BaseHandler {
         Set<String> handles = null;
         try {
             handles = driver.getWindowHandles();
-            //logger.info("No. of window handles: " + handles.size());
+            log.info("No. of window handles: " + handles.size());
         } catch (WebDriverException e) {
-            //logger.error("Unable to get the wiondow handles.\n" + e.getMessage());
+            log.error("Unable to get the wiondow handles.\n" + e.getMessage());
             throw new WebDriverException("Unable to get the wiondow handles.\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -62,9 +62,9 @@ public class WindowHandler extends BaseHandler {
     public WebDriver switchToWindow(String name, WebElement... waitForElement) {
         try {
             currentDriver = driver.switchTo().window(name);
-            //logger.info("Switching to window : " + driver.getTitle());
+            log.info("Switching to window : " + driver.getTitle());
         } catch (WebDriverException e) {
-            //logger.error("Unable to switch to " + name + " window.\n" + e.getMessage());
+            log.error("Unable to switch to " + name + " window.\n" + e.getMessage());
             throw new WebDriverException("Unable to switch to " + name + " window.\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -77,12 +77,12 @@ public class WindowHandler extends BaseHandler {
         WebDriver local = null;
         try {
             local = switchToWindow(windowHandle);
-            //logger.info("Switching to window : " + driver.getTitle());
+            log.info("Switching to window : " + driver.getTitle());
             if (local != null) {
                 local.close();
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to close the  " + windowHandle + " window.\n" + e.getMessage());
+            log.error("Unable to close the  " + windowHandle + " window.\n" + e.getMessage());
             throw new WebDriverException("Unable to close the  " + windowHandle + " window.\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -102,7 +102,7 @@ public class WindowHandler extends BaseHandler {
                 }
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to close all the windows.\n" + e.getMessage());
+            log.error("Unable to close all the windows.\n" + e.getMessage());
             throw new WebDriverException("Unable to close all the windows.\n" + e);
         }
     }
@@ -116,7 +116,7 @@ public class WindowHandler extends BaseHandler {
         try {
             parentWindow = driver.getWindowHandle();
         } catch (WebDriverException e) {
-            //logger.error("Unable to get the parent window handle.\n" + e.getMessage());
+            log.error("Unable to get the parent window handle.\n" + e.getMessage());
             throw new WebDriverException("Unable to get the parent window handle.\n" + e);
         }
         return parentWindow;
@@ -131,9 +131,9 @@ public class WindowHandler extends BaseHandler {
         WebElement activeElement = null;
         try {
             activeElement = driver.switchTo().activeElement();
-            //logger.info("Switching to active element : " + activeElement.getText());
+            log.info("Switching to active element : " + activeElement.getText());
         } catch (WebDriverException e) {
-            //logger.error("Unable to switch to active modal dialog active element.\n" + e.getMessage());
+            log.error("Unable to switch to active modal dialog active element.\n" + e.getMessage());
             throw new WebDriverException("Unable to switch to active modal dialog active element.\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -145,9 +145,9 @@ public class WindowHandler extends BaseHandler {
     public WebDriver switchToFrame(int index, WebElement... waitForElement) {
         try {
             currentDriver = driver.switchTo().frame(index);
-            //logger.info("Switching to frame : " + driver.getTitle());
+            log.info("Switching to frame : " + driver.getTitle());
         } catch (WebDriverException e) {
-            //logger.error("Unable to switch to frame by using frame index: " + index + ".\n" + e.getMessage());
+            log.error("Unable to switch to frame by using frame index: " + index + ".\n" + e.getMessage());
             throw new WebDriverException("Unable to switch to frame by using frame index: " + index + ".\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -159,9 +159,9 @@ public class WindowHandler extends BaseHandler {
     public WebDriver switchToMainFrame(WebElement... waitForElement) {
         try {
             currentDriver = driver.switchTo().defaultContent();
-            //logger.info("Switching to main window");
+            log.info("Switching to main window");
         } catch (WebDriverException e) {
-            //logger.error("Unable to switch to main/default frame.\n" + e.getMessage());
+            log.error("Unable to switch to main/default frame.\n" + e.getMessage());
             throw new WebDriverException("Unable to switch to main/default frame.\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -173,9 +173,9 @@ public class WindowHandler extends BaseHandler {
     public WebDriver switchToFrame(WebElement element, WebElement... waitForElement) {
         try {
             currentDriver = driver.switchTo().frame(element);
-            //logger.info("Switching to frame : " + driver.getTitle());
+            log.info("Switching to frame : " + driver.getTitle());
         } catch (WebDriverException e) {
-            //logger.error("Unable to switch to frame by using frame element: " + element + ".\n" + e.getMessage());
+            log.error("Unable to switch to frame by using frame element: " + element + ".\n" + e.getMessage());
             throw new WebDriverException("Unable to switch to frame by using frame element: " + element + ".\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -187,9 +187,9 @@ public class WindowHandler extends BaseHandler {
     public WebDriver switchToFrame(String idOrName, WebElement... waitForElement) {
         try {
             currentDriver = driver.switchTo().frame(idOrName);
-            //logger.info("Switching to frame : " + driver.getTitle());
+            log.info("Switching to frame : " + driver.getTitle());
         } catch (WebDriverException e) {
-            //logger.error("Unable to switch to frame by using frame id/name: " + idOrName + ".\n" + e.getMessage());
+            log.error("Unable to switch to frame by using frame id/name: " + idOrName + ".\n" + e.getMessage());
             throw new WebDriverException("Unable to switch to frame by using frame id/name: " + idOrName + ".\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -201,9 +201,9 @@ public class WindowHandler extends BaseHandler {
     public WebDriver switchToParentFrame(WebElement... waitForElement) {
         try {
             currentDriver = driver.switchTo().parentFrame();
-            //logger.info("Switching to parent frame : " + currentDriver.getTitle());
+            log.info("Switching to parent frame : " + currentDriver.getTitle());
         } catch (WebDriverException e) {
-            //logger.error("Unable to switch to parent frame" + e.getMessage());
+            log.error("Unable to switch to parent frame" + e.getMessage());
             throw new WebDriverException("Unable to switch to parent frame" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -226,7 +226,7 @@ public class WindowHandler extends BaseHandler {
                 }
             }
         } catch (WebDriverException e) {
-            //logger.error("Unable to get the list of frames" + e.getMessage());
+            log.error("Unable to get the list of frames" + e.getMessage());
             throw new WebDriverException("Unable to get the list of frames" + e);
         }
         return frames;
@@ -237,7 +237,7 @@ public class WindowHandler extends BaseHandler {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(index));
         } catch (WebDriverException e) {
-            //logger.error("Unable to switch to frame by using frame index: " + index + ".\n" + e.getMessage());
+            log.error("Unable to switch to frame by using frame index: " + index + ".\n" + e.getMessage());
             throw new WebDriverException("Unable to switch to frame by using frame index: " + index + ".\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -251,7 +251,7 @@ public class WindowHandler extends BaseHandler {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(idOrName));
         } catch (WebDriverException e) {
-            //logger.error("Unable to switch to frame by using frame id/name: " + idOrName + ".\n" + e.getMessage());
+            log.error("Unable to switch to frame by using frame id/name: " + idOrName + ".\n" + e.getMessage());
             throw new WebDriverException("Unable to switch to frame by using frame id/name: " + idOrName + ".\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {
@@ -265,7 +265,7 @@ public class WindowHandler extends BaseHandler {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
         } catch (WebDriverException e) {
-            //logger.error("Unable to switch to frame by using frame element: " + element + ".\n" + e.getMessage());
+            log.error("Unable to switch to frame by using frame element: " + element + ".\n" + e.getMessage());
             throw new WebDriverException("Unable to switch to frame by using frame element: " + element + ".\n" + e);
         }
         if (waitForElement != null && waitForElement.length > 0) {

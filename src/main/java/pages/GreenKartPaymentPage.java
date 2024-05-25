@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import testcontext.TestingContext;
 
 import java.util.List;
@@ -47,7 +46,6 @@ public class GreenKartPaymentPage extends WebBasePage {
 
     private GreenKartPaymentPage(TestingContext context) {
         super(context);
-        PageFactory.initElements(context.getDriver(), this);
     }
 
     public static GreenKartPaymentPage using(TestingContext context) {

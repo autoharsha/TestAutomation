@@ -15,7 +15,7 @@ public class AddVegetablesToCartSteps {
         this.context = context;
     }
 
-    @Given("Lauch GreenKart Browser with URL {string}")
+    @Given("Launch GreenKart Browser with URL {string}")
     public void lauch_green_kart_browser_with_url(String url) {
         GreenKartPaymentPage.using(context).launchApplication(url);
     }

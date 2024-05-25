@@ -1,5 +1,6 @@
 package webpageactions;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -8,9 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
+@Slf4j
 public class BaseHandler {
-
-    //private Logger logger = LogManager.getLogger(this.getClass());
 
     protected WebDriver driver;
     protected static long config_wait_timeout = 0L;
@@ -32,7 +32,7 @@ public class BaseHandler {
         } catch (StaleElementReferenceException e) {
             wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
         } catch (WebDriverException e) {
-            //logger.error("Element " + element + " is not visible \n " + e.getMessage());
+            log.error("Element " + element + " is not visible \n " + e.getMessage());
             throw new WebDriverException("Element " + element + " is not visible \n " + e);
         }
     }
@@ -43,7 +43,7 @@ public class BaseHandler {
         } catch (StaleElementReferenceException e) {
             wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(listOfElement.get(0))));
         } catch (WebDriverException e) {
-            //logger.error("Element " + listOfElement + " is not visible \n " + e.getMessage());
+            log.error("Element " + listOfElement + " is not visible \n " + e.getMessage());
             throw new WebDriverException("Element " + listOfElement + " is not visible \n " + e);
         }
 
@@ -58,21 +58,21 @@ public class BaseHandler {
         driver.navigate().refresh();
     }
 
-    public void waitforinvisibllityofelement(WebElement element) {
+    public void waitForInVisiblityOfElement(WebElement element) {
         try {
 
             wait.until(ExpectedConditions.invisibilityOf(element));
         } catch (WebDriverException e) {
-            //logger.error("Element " + element + " is visible \n " + e.getMessage());
+            log.error("Element " + element + " is visible \n " + e.getMessage());
             throw new WebDriverException("Element " + element + " is visible \n " + e);
         }
     }
 
-    public void waitforinvisiblelityofallelements(List<WebElement> elements) {
+    public void waitForInVisiblelityFfAllElements(List<WebElement> elements) {
         try {
             wait.until(ExpectedConditions.invisibilityOfAllElements(elements));
         } catch (WebDriverException e) {
-            //logger.error("Element " + elements + " is visible \n " + e.getMessage());
+            log.error("Element " + elements + " is visible \n " + e.getMessage());
             throw new WebDriverException("Element " + elements + " is visible \n " + e);
         }
     }
