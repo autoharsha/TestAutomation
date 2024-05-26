@@ -1,8 +1,10 @@
 package testexecution.drivermanagement.browsers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import testexecution.configuration.GlobalConfiguration;
@@ -12,6 +14,7 @@ import testexecution.platforms.Browser;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+@Slf4j
 public class RemoteWebDriverManager extends DriverManager {
     private final Browser browser;
     private final boolean headless;
@@ -25,7 +28,7 @@ public class RemoteWebDriverManager extends DriverManager {
         try {
             hubUrl = new URL(GlobalConfiguration.FRAMEWORK_CONFIG.gridConfig().getHubUrl());
         } catch (MalformedURLException e) {
-            //log.("issue connecting to Selenium GRID :" + e);
+            log.error("issue connecting to Selenium GRID :" + e);
         }
     }
 
@@ -52,6 +55,15 @@ public class RemoteWebDriverManager extends DriverManager {
                 edgeOptions.setAcceptInsecureCerts(true);
                 driver = new RemoteWebDriver(hubUrl, edgeOptions);
             }
+            case FIREFOX -> {
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.addArguments(resolution);
+                if (Boolean.TRUE.equals(headless)) {
+                    firefoxOptions.addArguments("--headless=new");
+                }
+                firefoxOptions.setAcceptInsecureCerts(true);
+                driver = new RemoteWebDriver(hubUrl, firefoxOptions);
+            }
             case SAFARI -> {
                 SafariOptions safariOptions = new SafariOptions();
                 driver = new RemoteWebDriver(hubUrl, safariOptions);
@@ -61,5 +73,6 @@ public class RemoteWebDriverManager extends DriverManager {
 
             }
         }
+        driverThreadLocal.set(driver);
     }
 }

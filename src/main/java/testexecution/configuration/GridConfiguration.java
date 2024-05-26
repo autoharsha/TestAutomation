@@ -3,7 +3,7 @@ package testexecution.configuration;
 public enum GridConfiguration {
 
     LOCAL(false, "No Grid required"),
-    LOCAL_GRID(true, "http://localhost:4449/wd/hub");
+    LOCAL_GRID(true, "http://localhost:4444/wd/hub");
 
 
     private final String hubUrl;

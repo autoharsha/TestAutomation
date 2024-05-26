@@ -3,6 +3,7 @@ package testexecution.platforms;
 public enum Browser implements Platform {
     CHROME("Chrome"),
     SAFARI("Safari"),
+    FIREFOX("Firefox"),
     EDGE("Edge");
 
     public final String label;

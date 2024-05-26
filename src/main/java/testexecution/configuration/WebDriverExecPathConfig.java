@@ -8,4 +8,7 @@ public interface WebDriverExecPathConfig extends Config, Reloadable {
 
     @DefaultValue("C:\\Automation\\executables\\chromedriver.exe")
     String chromeDriverPath();
+
+    @DefaultValue("C:\\Automation\\executables\\chromedriver.exe")
+    String firefoxDriverPath();
 }
