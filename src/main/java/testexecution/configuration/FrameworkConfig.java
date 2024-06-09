@@ -9,7 +9,7 @@ public interface FrameworkConfig extends Config {
     @DefaultValue("QA")
     String environment();
 
-    @DefaultValue("LOCAL_GRID")
+    @DefaultValue("LOCAL")
     GridConfiguration gridConfig();
 
     @DefaultValue("true")
